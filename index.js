@@ -7,7 +7,7 @@ and inspect the data
 console.log("users: ", window.users);
 console.log("todos: ", window.todos);
 
-function checkingUserLetterInput (userInputLetterParameter) {
+function checkingUserLetterInput(userInputLetterParameter) {
 
     let stringToArray = userInputLetterParameter.split("")
     if ( Number(userInputLetterParameter) || stringToArray.length >= 2 ) {
@@ -25,7 +25,7 @@ function checkingUserLetterInput (userInputLetterParameter) {
     
 }
 
-function checkingUserIdNumberInput (userInputIdParameter) {
+function checkingUserIdNumberInput(userInputIdParameter) {
     
     if ( Number.isNaN(userInputIdParameter) || (userInputIdParameter > 10 || userInputIdParameter < 1) ) {
     alert("Please user enter a number not a string dont enter big values or negative")
@@ -39,20 +39,43 @@ function checkingUserIdNumberInput (userInputIdParameter) {
 
 }
 
-function sayingHiToUserMatching (userLetterInputFilterParameter) {
-    for (let element of userLetterInputFilterParameter) {
-        console.log(`Hi : ${element.name} \n`)
+function checkingUserProperty(userInputPropertyParameter) {
+    if (Number(userInputPropertyParameter)) {
+        console.log("Enter a string not a number")
+        alert("Enter a name not number")
+        if (Number(userInputPropertyParameter)) {
+            throw new Error("Troll")
+        }
     }
 }
 
-function userNumberInputMatch (userNumberInputFilterParameter) {
+function checkingUserEmailInput(userInputPropertyParameter) {
+    for (let element of users) {
+        if (element.name === userInputPropertyParameter) {
+            return `Name : ${element.name} and email is : ${element.email}`
+        }
+    }
+
+}
+
+function sayingHiToUserMatching(userLetterInputFilterParameter) {
+    for (let element of userLetterInputFilterParameter) {
+        setInterval(function sayHi() {
+        console.log(`Hi : ${element.name} \n`)
+        }, 2000)
+    }
+}
+
+function userNumberInputMatch(userNumberInputFilterParameter) {
     
     let counterCompleted = 0
     let counterNotCompleted = 0
     for (let element of userNumberInputFilterParameter) {
         if (element.completed === false) {
             counterCompleted++
-            console.log(`user id : ${element.userId} \n  and the todoId : ${element.id} \n status : ${element.completed} \n`)
+            setInterval(function repeat() {
+            console.log(`user id : ${element.userId} \n and the todoId : ${element.id} \n status : ${element.completed} \n`)
+            }, 3000)
         }
         else {
             counterNotCompleted++
@@ -86,8 +109,11 @@ let userNumberInputFilter = todos.filter(function(todo) {
 })
 console.log(userNumberInputFilter)
 
-// let functionCatcher = sayingHiToUserMatching(userLetterInputFilter)
-// let intervalHiUser = setInterval(functionCatcher, 20000)
-
 sayingHiToUserMatching(userLetterInputFilter)
 userNumberInputMatch(userNumberInputFilter)
+
+let userInputProperty = prompt("Enter the name and we find the email : ")
+checkingUserProperty(userInputProperty)
+let storeEmail = checkingUserEmailInput(userInputProperty)
+console.log(storeEmail)
+
