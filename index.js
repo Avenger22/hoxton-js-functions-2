@@ -7,7 +7,7 @@ and inspect the data
 console.log("users: ", window.users);
 console.log("todos: ", window.todos);
 
-function checkingUserInput (userInputLetterParameter) {
+function checkingUserLetterInput (userInputLetterParameter) {
 
     let stringToArray = userInputLetterParameter.split("")
     if ( Number(userInputLetterParameter) || stringToArray.length >= 2 ) {
@@ -25,7 +25,7 @@ function checkingUserInput (userInputLetterParameter) {
     
 }
 
-function checkingUserIdInput (userInputIdParameter) {
+function checkingUserIdNumberInput (userInputIdParameter) {
     
     if ( Number.isNaN(userInputIdParameter) || (userInputIdParameter > 10 || userInputIdParameter < 1) ) {
     alert("Please user enter a number not a string dont enter big values or negative")
@@ -41,52 +41,58 @@ function checkingUserIdInput (userInputIdParameter) {
 
 function checkingUserLetterMatch (userInputLetterParameter) {
 
-    let messageDisplay
+    let messageDisplay = ``
     for (let element of users) {
 
         if (element.name.includes(userInputLetterParameter)) {
             messageDisplay += `Hi user : ${element.name} \n`
         }
 
-        else {
-            console.log("It has no match for the letter")
-            alert("It has no match")
-        }
+   }
+   // Loop ends here
 
-    }
-    console.log(messageDisplay)
-    alert(messageDisplay)
+   if(messageDisplay.length > 0) {
+   // if at least something was added to the message
+     console.log(messageDisplay)
+     alert(messageDisplay)
+   }
+
+    else {
+     // message empty. Nothing was found
+     alert("Oops, no match!")
+   }
 
 }
 
+function checkingUserToDoIdMatch (userIdInputParameter) {
 
-function checkingUserToDoId (userIdInputParameter) {
-
-    let messageDisplay
+    let messageDisplay = ``
     for (let element of todos) {
 
         if (element.userId === userIdInputParameter) {
-             messageDisplay += `Hi user with todo title: ${element.title} 
-            \n and todo id : ${element.id} 
-            \n and the status : ${element.completed}`
+             messageDisplay += `Hi user with todo title: ${element.title} \n and todo id : ${element.id} \n and the status : ${element.completed} \n \n`
         }
+    }
 
-        else {
-            alert("Nothing is found, user with this id has all todo completed")
-            throw new Error("TERMINATE")
-        }
+    // Loop ends here
 
-        console.log(messageDisplay)
-        alert(messageDisplay)
+   if(messageDisplay.length > 0) {
+    // if at least something was added to the message
+      console.log(messageDisplay)
+      alert(messageDisplay)
+    }
 
+     else {
+      // message empty. Nothing was found
+      alert("Oops, no match!")
     }
 
 }
 
 let userInputLetter = prompt("Hi User, please enter a letter : ")
-checkingUserInput(userInputLetter)
+checkingUserLetterInput(userInputLetter)
 checkingUserLetterMatch(userInputLetter)
 
 let userIdInput = Number(prompt("Enter User id in number from 1-10 :"))
-checkingUserIdInput(userIdInput)
-checkingUserToDoId(userIdInput)
+checkingUserIdNumberInput(userIdInput)
+checkingUserToDoIdMatch(userIdInput)
