@@ -8,6 +8,7 @@ console.log("users: ", window.users);
 console.log("todos: ", window.todos);
 
 function checkingUserInput (userInputLetterParameter) {
+
     let stringToArray = userInputLetterParameter.split("")
     if ( Number(userInputLetterParameter) || stringToArray.length >= 2 ) {
 
@@ -21,13 +22,14 @@ function checkingUserInput (userInputLetterParameter) {
         }
 
     }
+    
 }
 
 function checkingUserIdInput (userInputIdParameter) {
     
-    if (Number.isNaN(userInputIdParameter)) {
-    alert("Please user enter a number not a string")
-    userInputIdParameter = Number(prompt("Please enter again this time a number : "))
+    if ( Number.isNaN(userInputIdParameter) || (userInputIdParameter > 10 || userInputIdParameter < 1) ) {
+    alert("Please user enter a number not a string dont enter big values or negative")
+    userInputIdParameter = Number(prompt("Please enter again this time a number 1-10 : "))
 
         if (Number.isNaN(userInputIdParameter)) {
             alert("Sorry User we terminate the program you are trolling us.")
@@ -37,44 +39,54 @@ function checkingUserIdInput (userInputIdParameter) {
 
 }
 
-let userInputLetter = prompt("Hi User, please enter a letter : ")
-checkingUserInput(userInputLetter)
+function checkingUserLetterMatch (userInputLetterParameter) {
 
-const userWhoContainsLetterInput = users.filter (
-    function (userInputLetter) {
-        let messageDisplay = ``
-        for (const element of users) {
-            if (element.name.includes(userInputLetter)) {
-                messageDisplay += `Hi user : ${element.name} \n`
-            }
+    let messageDisplay
+    for (let element of users) {
 
-            // else {
-            //     console.log("It has no match for the letter")
-            //     alert("It has no match")
-            // }
+        if (element.name.includes(userInputLetterParameter)) {
+            messageDisplay += `Hi user : ${element.name} \n`
         }
+
+        else {
+            console.log("It has no match for the letter")
+            alert("It has no match")
+        }
+
+    }
+    console.log(messageDisplay)
+    alert(messageDisplay)
+
+}
+
+
+function checkingUserToDoId (userIdInputParameter) {
+
+    let messageDisplay
+    for (let element of todos) {
+
+        if (element.userId === userIdInputParameter) {
+             messageDisplay += `Hi user with todo title: ${element.title} 
+            \n and todo id : ${element.id} 
+            \n and the status : ${element.completed}`
+        }
+
+        else {
+            alert("Nothing is found, user with this id has all todo completed")
+            throw new Error("TERMINATE")
+        }
+
         console.log(messageDisplay)
         alert(messageDisplay)
-    }
-)
 
-let userIdInput = Number(prompt("Enter User id in number :"))
+    }
+
+}
+
+let userInputLetter = prompt("Hi User, please enter a letter : ")
+checkingUserInput(userInputLetter)
+checkingUserLetterMatch(userInputLetter)
+
+let userIdInput = Number(prompt("Enter User id in number from 1-10 :"))
 checkingUserIdInput(userIdInput)
-
-const userToDoWhoHasId = todos.filter(
-    function (userIdInput) {
-        let messageDisplay = ``
-        for (const element of todos) {
-            if (element.userId === userIdInput && element.completed === false) {
-                messageDisplay += `Hi user with todo title: ${element.title} 
-                \n and todo id : ${element.id} 
-                \n and the status : ${element.completed}`
-            }
-            console.log(messageDisplay)
-            alert(messageDisplay)
-        }
-    }
-)
-
-
-
+checkingUserToDoId(userIdInput)
