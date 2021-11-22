@@ -53,13 +53,14 @@ function checkingUserLetterMatch (userInputLetterParameter) {
 
    if(messageDisplay.length > 0) {
    // if at least something was added to the message
-     console.log(messageDisplay)
-     alert(messageDisplay)
+        let timeout = setTimeout(function sayHi () { console.log(messageDisplay) }, 2000)
+        // clearTimeout(timeout)
+        alert(messageDisplay)
    }
 
     else {
-     // message empty. Nothing was found
-     alert("Oops, no match!")
+        // message empty. Nothing was found
+        alert("Oops, no match!")
    }
 
 }
@@ -73,18 +74,18 @@ function checkingUserToDoIdMatch (userIdInputParameter) {
              messageDisplay += `Hi user with todo title: ${element.title} \n and todo id : ${element.id} \n and the status : ${element.completed} \n \n`
         }
     }
-
     // Loop ends here
 
    if(messageDisplay.length > 0) {
-    // if at least something was added to the message
-      console.log(messageDisplay)
-      alert(messageDisplay)
+        // if at least something was added to the message
+        let timeout = setTimeout(function sayHi () { console.log(messageDisplay) }, 3000)
+        // clearTimeout(timeout)
+        alert(messageDisplay)
     }
 
      else {
-      // message empty. Nothing was found
-      alert("Oops, no match!")
+        // message empty. Nothing was found
+        alert("Oops, no match!")
     }
 
 }
