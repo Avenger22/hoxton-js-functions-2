@@ -39,61 +39,55 @@ function checkingUserIdNumberInput (userInputIdParameter) {
 
 }
 
-function checkingUserLetterMatch (userInputLetterParameter) {
-
-    let messageDisplay = ``
-    for (let element of users) {
-
-        if (element.name.includes(userInputLetterParameter)) {
-            messageDisplay += `Hi user : ${element.name} \n`
-        }
-
-   }
-   // Loop ends here
-
-   if(messageDisplay.length > 0) {
-   // if at least something was added to the message
-        let timeout = setTimeout(function sayHi () { console.log(messageDisplay) }, 2000)
-        // clearTimeout(timeout)
-        alert(messageDisplay)
-   }
-
-    else {
-        // message empty. Nothing was found
-        alert("Oops, no match!")
-   }
-
+function sayingHiToUserMatching (userLetterInputFilterParameter) {
+    for (let element of userLetterInputFilterParameter) {
+        console.log(`Hi : ${element.name} \n`)
+    }
 }
 
-function checkingUserToDoIdMatch (userIdInputParameter) {
-
-    let messageDisplay = ``
-    for (let element of todos) {
-
-        if (element.userId === userIdInputParameter) {
-             messageDisplay += `Hi user with todo title: ${element.title} \n and todo id : ${element.id} \n and the status : ${element.completed} \n \n`
+function userNumberInputMatch (userNumberInputFilterParameter) {
+    
+    let counterCompleted = 0
+    let counterNotCompleted = 0
+    for (let element of userNumberInputFilterParameter) {
+        if (element.completed === false) {
+            counterCompleted++
+            console.log(`user id : ${element.userId} \n  and the todoId : ${element.id} \n status : ${element.completed} \n`)
+        }
+        else {
+            counterNotCompleted++
         }
     }
-    // Loop ends here
 
-   if(messageDisplay.length > 0) {
-        // if at least something was added to the message
-        let timeout = setTimeout(function sayHi () { console.log(messageDisplay) }, 3000)
-        // clearTimeout(timeout)
-        alert(messageDisplay)
+    if(counterCompleted === 0) {
+        // message empty. Nothing was found
+        console.log(`Everything was not completed so : ${counterCompleted} of completed items \n and number of unclompleted items is : ${counterNotCompleted}`)
     }
 
-     else {
-        // message empty. Nothing was found
-        alert("Oops, no match!")
+    else {
+        console.log(`Number of completed todos is : ${counterCompleted} \n wheares uncompleted were ${counterNotCompleted}`)
     }
 
 }
 
 let userInputLetter = prompt("Hi User, please enter a letter : ")
 checkingUserLetterInput(userInputLetter)
-checkingUserLetterMatch(userInputLetter)
 
 let userIdInput = Number(prompt("Enter User id in number from 1-10 :"))
 checkingUserIdNumberInput(userIdInput)
-checkingUserToDoIdMatch(userIdInput)
+
+let userLetterInputFilter = users.filter(function(user) {
+        return user.name.includes(userInputLetter)
+})
+console.log(userLetterInputFilter)
+
+let userNumberInputFilter = todos.filter(function(todo) {
+        return todo.userId === userIdInput
+})
+console.log(userNumberInputFilter)
+
+// let functionCatcher = sayingHiToUserMatching(userLetterInputFilter)
+// let intervalHiUser = setInterval(functionCatcher, 20000)
+
+sayingHiToUserMatching(userLetterInputFilter)
+userNumberInputMatch(userNumberInputFilter)
